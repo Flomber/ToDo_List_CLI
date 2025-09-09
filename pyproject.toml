@@ -3,14 +3,14 @@ name = "todo_app"
 version = "0.1.0"
 description = "CLI ToDo Manager"
 authors = [
-    { name = "Fabian" }
+    { name = "Fabian Steube" }
 ]
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = []
 
 [project.scripts]
-todo = "todo.cli:main"
+todo = "todo.main:main"
 
 [build-system]
 requires = ["setuptools>=61.0"]

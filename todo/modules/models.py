@@ -9,11 +9,11 @@ class Matter:
         self.note = note if note is not None else []
 
 class Task:
-    def __init__(self, id: int, titel: str, note: Optional[list[str]] = None) -> None:
+    def __init__(self, id: int, titel: str, note: Optional[list[str]] = None, done: Optional[bool] = False) -> None:
         self.id = id
         self.titel = titel
         self.note = note if note is not None else []
-        self.done: bool = False
+        self.done = done if done is not False else False
 
 # class Done(Task):
 #     def __init__(self):
@@ -40,7 +40,6 @@ class ToDoManager:
     def create_matter(self, titel) -> None:
         matter = Matter(self.next_matter_id, titel)
         self.add_matter(matter)
-        self.next_matter_id += 1
     def remove_matter(self, matter_id: int) -> None:
         for matter in self.matters:
             if matter.id == matter_id:
@@ -52,7 +51,6 @@ class ToDoManager:
     def create_task(self, titel) -> None:
         task = Task(self.next_task_id, titel)
         self.add_task(task)
-        self.next_task_id += 1
     def remove_task(self, task_id: int) -> None:
         for task in self.tasks:
             if task.id == task_id:

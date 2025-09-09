@@ -1,9 +1,10 @@
 pyproject.toml
-todo/__init__.py
-todo/cli.py
-todo/editor.py
-todo/models.py
-todo/utils.py
+todo/main.py
+todo/modules/__init__.py
+todo/modules/cli.py
+todo/modules/editor.py
+todo/modules/models.py
+todo/modules/utils.py
 todo_app.egg-info/PKG-INFO
 todo_app.egg-info/SOURCES.txt
 todo_app.egg-info/dependency_links.txt

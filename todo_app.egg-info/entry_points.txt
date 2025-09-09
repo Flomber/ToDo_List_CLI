@@ -1,2 +1,2 @@
 [console_scripts]
-todo = todo.cli:main
+todo = todo.main:main
