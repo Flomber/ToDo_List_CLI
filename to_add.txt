@@ -1,3 +1,32 @@
-File Recognition
+File Recognition [Done]
 several features
-way to have optional args
+    # Commands that should be implemented:
+    # create file [implemented]
+    # rename file
+    # add matter [implemented]
+    # edit matter
+    # add note to matter
+    # delete matter (stored in background) [implemented]
+    # show deleted matters
+    # add task [implemented]
+    # edit task
+    # add note to task
+    # delete task
+    # show deleted tasks
+    # mark task as done [implemented]
+    # delete done task
+    # show deleted done task
+    # undo task
+    # clear specific section
+    # clear all
+    # list todo list [implemented]
+    # list specific section (filter)
+    # stats?
+    # beckup
+way to have optional args [Done]
+
+set own headers?
+to txt
+remodel list prints
+deleted stuff in different file?
+adding done timestamp

@@ -1,5 +1,20 @@
 {
     "matters": [],
+    "removed_matters": [
+        {
+            "id": 1,
+            "titel": "math",
+            "note": []
+        },
+        {
+            "id": 1,
+            "titel": "sgnkj",
+            "note": [
+                "ha",
+                "ah"
+            ]
+        }
+    ],
     "tasks": [],
     "done": [
         {

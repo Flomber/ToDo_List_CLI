@@ -22,16 +22,31 @@ def cli_logics() -> None:
         editor.create_json(basename)
         save_last_filename(basename)
     elif args.command == "list":
-        editor.load_from_json(args.filename)
-        editor.manager.list_all()
-    elif args.command == "addt":
         editor.load_from_json(basename)
-        editor.manager.create_task(args.titel)
+        editor.manager.list_all()
+        save_last_filename(basename)
+    elif args.command == "renum":
+        editor.load_from_json(basename)
+        editor.manager.renumber()
         editor.save_to_json()
         save_last_filename(basename)
     elif args.command == "addm":
         editor.load_from_json(basename)
         editor.manager.create_matter(args.titel)
+        editor.save_to_json()
+        save_last_filename(basename)
+    elif args.command == "notem":
+        editor.load_from_json(basename)
+        editor.manager.note_matter(args.id, args.titel)
+        editor.save_to_json()
+        save_last_filename(basename)
+    elif args.command == "delm":
+        editor.load_from_json(basename)
+        editor.manager.remove_matter(args.id)
+        editor.save_to_json()
+    elif args.command == "addt":
+        editor.load_from_json(basename)
+        editor.manager.create_task(args.titel)
         editor.save_to_json()
         save_last_filename(basename)
     elif args.command == "done":

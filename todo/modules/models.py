@@ -21,49 +21,55 @@ class Task:
 
 class ToDoManager:
     def __init__(self) -> None:
-        # self.data: dict[str, list] = {
-        #     "Fragen/Vorschlaege": [],
-        #     "Tasks": [],
-        #     "Done": []
-        # }
-        self.next_matter_id: int = 1
-        self.next_task_id: int = 1
-        self.next_done_id: int = 1
-
         self.matters: list[Matter] = []
+        self.removed_matters: list[Matter] = []
         self.tasks: list[Task] = []
         self.done: list[Task] = []
-    
 
-    def add_matter(self, matter: Matter) -> None:
-        self.matters.append(matter)
+    def renumber(self) -> None:
+        for idx, matter in enumerate(self.matters, start=1):
+            matter.id = idx
+        for idx, task in enumerate(self.tasks, start=1):
+            task.id = idx
+        for idx, done in enumerate(self.done, start=1):
+            done.id = idx
+
     def create_matter(self, titel) -> None:
-        matter = Matter(self.next_matter_id, titel)
-        self.add_matter(matter)
+        matter = Matter(len(self.matters) + 1, titel)
+        self.matters.append(matter)
+        self.renumber()
+
+    def create_task(self, titel) -> None:
+        task = Task(len(self.tasks) + 1, titel)
+        self.tasks.append(task)
+        self.renumber()
+    
+    def note_matter(self, matter_id, titel) -> None:
+        for matter in self.matters:
+            if matter.id == matter_id:
+                matter.note.append(titel)
+        
     def remove_matter(self, matter_id: int) -> None:
         for matter in self.matters:
             if matter.id == matter_id:
+                self.removed_matters.append(matter)
                 self.matters.remove(matter)
-                #self.next_matter_id -= 1
+        self.renumber()
     
-    def add_task(self, task: Task) -> None:
-        self.tasks.append(task)
-    def create_task(self, titel) -> None:
-        task = Task(self.next_task_id, titel)
-        self.add_task(task)
     def remove_task(self, task_id: int) -> None:
         for task in self.tasks:
             if task.id == task_id:
                 self.tasks.remove(task)
-                #self.next_task_id -= 1
+        self.renumber()
 
     def mark_done(self, task_id: int) -> None:
-        for task in self.tasks:
+        for task in list(self.tasks):
             if task.id == task_id:
                 task.done = True
-                task.id = self.next_done_id
                 self.done.append(task)
                 self.tasks.remove(task)
+                break
+        self.renumber()
 
     def list_matters(self) -> None:
         print("Fragen/Vorschlaege:")
@@ -71,21 +77,21 @@ class ToDoManager:
             print(f"{matter.id}: {matter.titel}")
             if matter.note:
                 for note in matter.note:
-                    print(f"\t-> {note}\n")
+                    print(f"\t-> {note}")
     def list_tasks(self) -> None:
         print("Tasks:")
         for task in self.tasks:
             print(f"{task.id}: {task.titel}")
             if task.note:
                 for note in task.note:
-                    print(f"\t-> {note}\n")
+                    print(f"\t-> {note}")
     def list_done(self) -> None:
         print("Done Tasks:")
         for task in self.done:
             print(f"{task.id}: {task.titel}")
             if task.note:
                 for note in task.note:
-                    print(f"\t-> {note}\n")
+                    print(f"\t-> {note}")
     def list_all(self) -> None:
         self.list_matters()
         self.list_tasks()

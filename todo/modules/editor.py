@@ -25,6 +25,7 @@ class ToDoEditor:
         
         data = {
             "matters": [],
+            "removed_matters": [],
             "tasks": [],
             "done": []
         }
@@ -37,6 +38,7 @@ class ToDoEditor:
             raise RuntimeError("No JSON file selected. Load or create a list first!")
         data = {
             "matters": [matter.__dict__ for matter in self.manager.matters],
+            "removed_matters": [matter.__dict__ for matter in self.manager.removed_matters],
             "tasks": [task.__dict__ for task in self.manager.tasks],
             "done": [done.__dict__ for done in self.manager.done]
         }
@@ -52,6 +54,7 @@ class ToDoEditor:
         with open(self.file, "r", encoding="utf-8") as f:
             data = json.load(f)
         self.manager.matters = [Matter(**m) for m in data.get("matters", [])]
+        self.manager.removed_matters = [Matter(**m) for m in data.get("removed_matters", [])]
         self.manager.tasks = [Task(**t) for t in data.get("tasks", [])]
         self.manager.done = [Task(**d) for d in data.get("done", [])]
     
