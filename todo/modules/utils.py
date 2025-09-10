@@ -6,6 +6,7 @@ import os
 from typing import Optional
 
 def add_new_parser(subparsers, command_name: str, help_text: str, args: Optional[list[tuple[str, type, str]]] = None) -> None:
+    # useless right now
     parser_name = command_name + "_parser"
     parser_name = subparsers.add_parser(command_name, help=help_text)
     if args:
@@ -17,35 +18,115 @@ def set_parser() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="ToDo CLI to manage your ToDo's")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    def add_new_parser(command_name: str, help_text: str, args: Optional[list[tuple[str, type, str, dict]]] = None, subparsers=subparsers) -> None:
-        parser_name = subparsers.add_parser(command_name, help=help_text)
+    def add_new_parser(command_name: str, help_text: str, args: Optional[list[tuple[str, type, str, dict]]] = None, subparsers=subparsers) -> argparse.ArgumentParser:
+        parser_obj = subparsers.add_parser(command_name, help=help_text)
         if args:
             for name, typ, arg_help, extra in args:
-                parser_name.add_argument(name, type=typ, help=arg_help, **(extra or {}))
+                parser_obj.add_argument(name, type=typ, help=arg_help, **(extra or {}))
+        return parser_obj
 
     #create todo list
-    add_new_parser("init", "Create a txt file with base todo list layout", [("filename", str, "Choose a filename for your todo list (optional, dafault: 'todo')", {"nargs": "?"})])
+    add_new_parser(
+        "init", 
+        "Create a txt file with base todo list layout", 
+        [
+            ("filename", str, "Choose a filename for your todo list (optional, dafault: 'todo')", {"nargs": "?"})
+        ]
+    )
 
-    #list task
-    add_new_parser("list", "List all matters and tasks", [("filename", str, "Filename of todo list (optional)", {"nargs": "?"})])
+    #list todos
+    add_new_parser(
+        "list", 
+        "List all matters and tasks", 
+        [
+            ("filename", str, "Filename of todo list (optional)", {"nargs": "?"}), 
+        ]
+    ).add_argument(
+        "--section", "-s",
+        choices = ["matters", "tasks", "done"],
+        help = "List a specific section"
+    )
 
     #manually renumber tasks
-    add_new_parser("renum", "Renumber all todo's", [("filename", str, "Filename of todo list (optional)", {"nargs": "?"})])
+    add_new_parser(
+        "renum", 
+        "Renumber all todo's", 
+        [
+            ("filename", str, "Filename of todo list (optional)", {"nargs": "?"})
+        ]
+    )
 
     #add matter
-    add_new_parser("addm", "Add new matter", [("filename", str, "Filename of todo list (optional)", {"nargs": "?"}), ("titel", str, "Titel of matter", {})])
+    add_new_parser(
+        "addm", 
+        "Add new matter", 
+        [
+            ("filename", str, "Filename of todo list (optional)", {"nargs": "?"}), 
+            ("titel", str, "Titel of matter in ''", {"nargs": "+"})
+        ]
+    )
 
     #add note to matter
-    add_new_parser("notem", "Add note to existing matter", [("filename", str, "Filename of todo list (optional)", {"nargs": "?"}), ("id", int, "ID of matter", {}), ("titel", str, "Titel of note", {})])
+    add_new_parser(
+        "notem", 
+        "Add note to existing matter", 
+        [
+            ("filename", str, "Filename of todo list (optional)", {"nargs": "?"}), 
+            ("id", int, "ID of matter", {}), 
+            ("titel", str, "Titel of note in ''", {"nargs": "+"})
+        ]
+    )
 
     #remove matter
-    add_new_parser("delm", "Deletes existing matter", [("filename", str, "Filename of todo list (optional)", {"nargs": "?"}), ("id", int, "ID of matter", {})])
+    add_new_parser(
+        "delm", 
+        "Deletes existing matter", 
+        [
+            ("filename", str, "Filename of todo list (optional)", {"nargs": "?"}), 
+            ("id", int, "ID of matter", {})
+        ]
+    )
 
     #add task
-    add_new_parser("addt", "Add new task", [("filename", str, "Filename of todo list (optional)", {"nargs": "?"}), ("titel", str, "Titel of task", {})])
+    add_new_parser(
+        "addt", 
+        "Add new task", 
+        [
+            ("filename", str, "Filename of todo list (optional)", {"nargs": "?"}), 
+            ("titel", str, "Titel of task in ''", {"nargs": "+"})
+        ]
+    )
+
+    #add note to task
+    add_new_parser(
+        "notet", 
+        "Add note to existing task", 
+        [
+            ("filename", str, "Filename of todo list (optional)", {"nargs": "?"}), 
+            ("id", int, "ID of task", {}), 
+            ("titel", str, "Titel of note in ''", {"nargs": "+"})
+        ]
+    )
+
+    #remove task
+    add_new_parser(
+        "delt", 
+        "Deletes existing task", 
+        [
+            ("filename", str, "Filename of todo list (optional)", {"nargs": "?"}), 
+            ("id", int, "ID of task", {})
+        ]
+    )
 
     #mark task done
-    add_new_parser("done", "Marks task as done", [("filename", str, "Filename of todo list (optional)", {"nargs": "?"}), ("id", int, "ID of task", {})])
+    add_new_parser(
+        "done", 
+        "Marks task as done", 
+        [
+            ("filename", str, "Filename of todo list (optional)", {"nargs": "?"}), 
+            ("id", int, "ID of task", {})
+        ]
+    )
 
     #export todo list
     #add_new_parser("export", "Export ToDo list to txt file", [("filename", str, "Filename of todo list (optional)", {"nargs": "?"})])

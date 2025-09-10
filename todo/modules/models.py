@@ -24,6 +24,7 @@ class ToDoManager:
         self.matters: list[Matter] = []
         self.removed_matters: list[Matter] = []
         self.tasks: list[Task] = []
+        self.removed_tasks: list[Task] = []
         self.done: list[Task] = []
 
     def renumber(self) -> None:
@@ -48,6 +49,11 @@ class ToDoManager:
         for matter in self.matters:
             if matter.id == matter_id:
                 matter.note.append(titel)
+
+    def note_task(self, task_id, titel) -> None:
+        for task in self.tasks:
+            if task.id == task_id:
+                task.note.append(titel)
         
     def remove_matter(self, matter_id: int) -> None:
         for matter in self.matters:
@@ -59,6 +65,7 @@ class ToDoManager:
     def remove_task(self, task_id: int) -> None:
         for task in self.tasks:
             if task.id == task_id:
+                self.removed_tasks.append(task)
                 self.tasks.remove(task)
         self.renumber()
 
@@ -92,7 +99,16 @@ class ToDoManager:
             if task.note:
                 for note in task.note:
                     print(f"\t-> {note}")
-    def list_all(self) -> None:
-        self.list_matters()
-        self.list_tasks()
-        self.list_done()
+    def list(self, section) -> None:
+        if section == "matters":
+            self.list_matters()
+        elif section == "tasks":
+            self.list_tasks()
+        elif section == "done":
+            self.list_done()
+        elif section is None:
+            self.list_matters()
+            self.list_tasks()
+            self.list_done()
+        else:
+            print("section does not exist")

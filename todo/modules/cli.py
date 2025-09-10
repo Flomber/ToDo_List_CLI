@@ -23,7 +23,7 @@ def cli_logics() -> None:
         save_last_filename(basename)
     elif args.command == "list":
         editor.load_from_json(basename)
-        editor.manager.list_all()
+        editor.manager.list(args.section)
         save_last_filename(basename)
     elif args.command == "renum":
         editor.load_from_json(basename)
@@ -31,13 +31,15 @@ def cli_logics() -> None:
         editor.save_to_json()
         save_last_filename(basename)
     elif args.command == "addm":
+        titel = " ".join(args.titel)
         editor.load_from_json(basename)
-        editor.manager.create_matter(args.titel)
+        editor.manager.create_matter(titel)
         editor.save_to_json()
         save_last_filename(basename)
     elif args.command == "notem":
+        titel = " ".join(args.titel)
         editor.load_from_json(basename)
-        editor.manager.note_matter(args.id, args.titel)
+        editor.manager.note_matter(args.id, titel)
         editor.save_to_json()
         save_last_filename(basename)
     elif args.command == "delm":
@@ -45,10 +47,21 @@ def cli_logics() -> None:
         editor.manager.remove_matter(args.id)
         editor.save_to_json()
     elif args.command == "addt":
+        titel = " ".join(args.titel)
         editor.load_from_json(basename)
-        editor.manager.create_task(args.titel)
+        editor.manager.create_task(titel)
         editor.save_to_json()
         save_last_filename(basename)
+    elif args.command == "notet":
+        titel = " ".join(args.titel)
+        editor.load_from_json(basename)
+        editor.manager.note_task(args.id, titel)
+        editor.save_to_json()
+        save_last_filename(basename)
+    elif args.command == "delt":
+        editor.load_from_json(basename)
+        editor.manager.remove_task(args.id)
+        editor.save_to_json()
     elif args.command == "done":
         editor.load_from_json(basename)
         editor.manager.mark_done(args.id)

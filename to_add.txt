@@ -5,13 +5,13 @@ several features
     # rename file
     # add matter [implemented]
     # edit matter
-    # add note to matter
+    # add note to matter [implemented]
     # delete matter (stored in background) [implemented]
     # show deleted matters
     # add task [implemented]
     # edit task
-    # add note to task
-    # delete task
+    # add note to task [implemented]
+    # delete task [implemented]
     # show deleted tasks
     # mark task as done [implemented]
     # delete done task
@@ -30,3 +30,9 @@ to txt
 remodel list prints
 deleted stuff in different file?
 adding done timestamp
+
+Problems:
+todo addm bring trash out
+    output:
+    File bring.json doesn't exist (creates bring.json)
+    Saved content to bring.json

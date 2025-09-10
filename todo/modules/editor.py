@@ -40,6 +40,7 @@ class ToDoEditor:
             "matters": [matter.__dict__ for matter in self.manager.matters],
             "removed_matters": [matter.__dict__ for matter in self.manager.removed_matters],
             "tasks": [task.__dict__ for task in self.manager.tasks],
+            "removed_tasks": [task.__dict__ for task in self.manager.removed_tasks],
             "done": [done.__dict__ for done in self.manager.done]
         }
         write_content_json(self.file, data)
@@ -56,6 +57,7 @@ class ToDoEditor:
         self.manager.matters = [Matter(**m) for m in data.get("matters", [])]
         self.manager.removed_matters = [Matter(**m) for m in data.get("removed_matters", [])]
         self.manager.tasks = [Task(**t) for t in data.get("tasks", [])]
+        self.manager.removed_tasks = [Task(**t) for t in data.get("removed_tasks", [])]
         self.manager.done = [Task(**d) for d in data.get("done", [])]
     
     def json_to_txt(self):
