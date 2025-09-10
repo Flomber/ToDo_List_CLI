@@ -59,6 +59,9 @@ class ToDoEditor:
         self.manager.tasks = [Task(**t) for t in data.get("tasks", [])]
         self.manager.removed_tasks = [Task(**t) for t in data.get("removed_tasks", [])]
         self.manager.done = [Task(**d) for d in data.get("done", [])]
+
+    def clear_json(self, basename) -> None:
+        pass
     
     def json_to_txt(self):
         json_file = self.file
