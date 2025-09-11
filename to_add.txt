@@ -7,18 +7,18 @@ several features
     # edit matter
     # add note to matter [implemented]
     # delete matter (stored in background) [implemented]
-    # show deleted matters
+    # show deleted matters [implemented]
     # add task [implemented]
     # edit task
     # add note to task [implemented]
     # delete task [implemented]
-    # show deleted tasks
+    # show deleted tasks [implemented]
     # mark task as done [implemented]
     # delete done task
     # show deleted done task
     # undo task
-    # clear specific section
-    # clear all
+    # clear specific section [implemented]
+    # clear all [implemented]
     # list todo list [implemented]
     # list specific section (filter) [implemented]
     # stats?
