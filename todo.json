@@ -1,60 +1,7 @@
 {
-    "matters": [
-        {
-            "id": 1,
-            "titel": "bing trash out",
-            "note": []
-        },
-        {
-            "id": 2,
-            "titel": "bring me out",
-            "note": []
-        },
-        {
-            "id": 3,
-            "titel": "leave",
-            "note": [
-                "left"
-            ]
-        },
-        {
-            "id": 4,
-            "titel": "ha ha ha",
-            "note": [
-                "im laughing"
-            ]
-        }
-    ],
-    "removed_matters": [
-        {
-            "id": 1,
-            "titel": "math",
-            "note": []
-        },
-        {
-            "id": 1,
-            "titel": "sgnkj",
-            "note": [
-                "ha",
-                "ah"
-            ]
-        }
-    ],
+    "matters": [],
+    "removed_matters": [],
     "tasks": [],
-    "done": [
-        {
-            "id": 1,
-            "titel": "coocki",
-            "note": [],
-            "done": true
-        },
-        {
-            "id": 2,
-            "titel": "find problems",
-            "note": [
-                "finish learning EP"
-            ],
-            "done": true
-        }
-    ]
+    "removed_tasks": [],
+    "done": []
 }

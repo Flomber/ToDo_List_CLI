@@ -30,6 +30,11 @@ def cli_logics() -> None:
         editor.manager.renumber()
         editor.save_to_json()
         save_last_filename(basename)
+    elif args.command == "clear":
+        editor.load_from_json(basename)
+        editor.clear_json(basename, args.section)
+        editor.save_to_json()
+        save_last_filename(basename)
     elif args.command == "addm":
         titel = " ".join(args.titel)
         editor.load_from_json(basename)

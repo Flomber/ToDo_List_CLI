@@ -99,6 +99,20 @@ class ToDoManager:
             if task.note:
                 for note in task.note:
                     print(f"\t-> {note}")
+    def list_del_matters(self) -> None:
+        print("Gelöschte Fragen/Vorschlaege:")
+        for matter in self.removed_matters:
+            print(f"{matter.id}: {matter.titel}")
+            if matter.note:
+                for note in matter.note:
+                    print(f"\t-> {note}")
+    def list_del_tasks(self) -> None:
+        print("Gelöschte Tasks:")
+        for task in self.removed_tasks:
+            print(f"{task.id}: {task.titel}")
+            if task.note:
+                for note in task.note:
+                    print(f"\t-> {note}")
     def list(self, section) -> None:
         if section == "matters":
             self.list_matters()
@@ -106,6 +120,10 @@ class ToDoManager:
             self.list_tasks()
         elif section == "done":
             self.list_done()
+        elif section == "removed matters":
+            self.list_del_matters()
+        elif section == "removed tasks":
+            self.list_del_tasks()
         elif section is None:
             self.list_matters()
             self.list_tasks()

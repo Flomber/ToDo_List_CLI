@@ -20,9 +20,9 @@ several features
     # clear specific section
     # clear all
     # list todo list [implemented]
-    # list specific section (filter)
+    # list specific section (filter) [implemented]
     # stats?
-    # beckup
+    # backup
 way to have optional args [Done]
 
 set own headers?

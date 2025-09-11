@@ -43,7 +43,7 @@ def set_parser() -> argparse.Namespace:
         ]
     ).add_argument(
         "--section", "-s",
-        choices = ["matters", "tasks", "done"],
+        choices = ["matters", "tasks", "done", "removed matters", "removed tasks"],
         help = "List a specific section"
     )
 
@@ -54,6 +54,19 @@ def set_parser() -> argparse.Namespace:
         [
             ("filename", str, "Filename of todo list (optional)", {"nargs": "?"})
         ]
+    )
+
+    #clear whole todo list
+    add_new_parser(
+        "clear",
+        "Clear whole content of todo list.",
+        [
+            ("filename", str, "Filename of todo list (optional)", {"nargs": "?"})
+        ]
+    ).add_argument(
+        "--section", "-s",
+        choices = ["matters", "tasks", "done", "removed matters", "removed tasks"],
+        help = "Clear a specific section"
     )
 
     #add matter

@@ -60,8 +60,43 @@ class ToDoEditor:
         self.manager.removed_tasks = [Task(**t) for t in data.get("removed_tasks", [])]
         self.manager.done = [Task(**d) for d in data.get("done", [])]
 
-    def clear_json(self, basename) -> None:
-        pass
+    def clear_json(self, basename, section) -> None:
+        if section == "matters":
+            clear: bool = True if input(f"Are you sure you want to clear content of {section} in {basename}?\n(y/n)\n").lower() == "y" or "yes" or "1" else False
+            if clear is False:
+                return
+            self.manager.matters.clear()
+        elif section == "tasks":
+            clear: bool = True if input(f"Are you sure you want to content of {section} in {basename}?\n(y/n)\n").lower() == "y" or "yes" or "1" else False
+            if clear is False:
+                return
+            self.manager.tasks.clear()
+        elif section == "done":
+            clear: bool = True if input(f"Are you sure you want to content of {section} in {basename}?\n(y/n)\n").lower() == "y" or "yes" or "1" else False
+            if clear is False:
+                return
+            self.manager.done.clear()
+        elif section == "removed matters":
+            clear: bool = True if input(f"Are you sure you want to content of {section} in {basename}?\n(y/n)\n").lower() == "y" or "yes" or "1" else False
+            if clear is False:
+                return
+            self.manager.removed_matters.clear()
+        elif section == "removed tasks":
+            clear: bool = True if input(f"Are you sure you want to content of {section} in {basename}?\n(y/n)\n").lower() == "y" or "yes" or "1" else False
+            if clear is False:
+                return
+            self.manager.removed_tasks.clear()
+        elif section is None:
+            clear: bool = True if input(f"Are you sure you want to clear all content of {basename}?\n(y/n)\n").lower() == "y" or "yes" or "1" else False
+            if clear is False:
+                return
+            self.manager.matters.clear()
+            self.manager.removed_matters.clear()
+            self.manager.tasks.clear()
+            self.manager.removed_tasks.clear()
+            self.manager.done.clear()
+        else:
+            print("section does not exist")
     
     def json_to_txt(self):
         json_file = self.file
