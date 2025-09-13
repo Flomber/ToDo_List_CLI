@@ -34,6 +34,24 @@ def set_parser() -> argparse.Namespace:
         ]
     )
 
+    #delete todo list
+    add_new_parser(
+        "delete",
+        "Deletes todo list files",
+        [
+            ("filename", str, "Choose a filename for your todo list (optional, dafault: 'todo')", {"nargs": "?"})
+        ]
+    )
+
+    #reload list
+    add_new_parser(
+        "reload",
+        "Reloads todo list if updates were not registered",
+        [
+            ("filename", str, "Choose a filename for your todo list (optional, dafault: 'todo')", {"nargs": "?"})
+        ]
+    )
+
     #list todos
     add_new_parser(
         "list", 
@@ -183,6 +201,11 @@ def load_last_filename(base_dir: str = ".") -> Optional[str]:
             name: str = f.read().strip()
             return name if name else None
     return None
+
+def delete_last_filename(base_dir: str = ".") -> None:
+    marker_path: str = os.path.join(base_dir, "todo", "modules", LAST_FILE_MARKER)
+    if os.path.exists(marker_path):
+        os.remove(marker_path)
 
 def resolve_basename(preferred: Optional[str]) -> str:
     # chooses basename in order 1) preferred, 2) last saved filename, 3) Fallback 'todo'

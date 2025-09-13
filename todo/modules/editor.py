@@ -100,12 +100,22 @@ class ToDoEditor:
             data = json.load(f)
         lines = []
         lines += list_content("===| Fragen/Vorschlaege |===", [Matter(**m) for m in data["matters"]])
-        lines += list_content("===| Tasks |===", [Task(**t) for t in data["tasks"]])
-        lines += list_content("===| Done Tasks |===", [Task(**d) for d in data["done"]])
+        lines += list_content("\n===| Tasks |===", [Task(**t) for t in data["tasks"]])
+        lines += list_content("\n===| Done Tasks |===", [Task(**d) for d in data["done"]])
         write_content_txt(txt_file, lines)
 
-
-
+    def delete_files(self, basename: str):
+        json_file: str = basename + ".json"
+        txt_file: str = basename + ".txt"
+        clear: bool = True if input(f"Are you sure you want to delete your todo list named '{basename}'?\n(y/n)\n").lower() == "y" or "yes" or "1" else False
+        
+        for file in [json_file, txt_file]:
+            if clear is False:
+                return
+            if os.path.exists(file):
+                os.remove(file)
+                print(f"{file} was deleted")
+ 
     #==========| txt stuff |==========#
     #hier eine Funktion, um eine neue Listendatei zu erstellen.
     def create_txt(self, basename: str = "todo"):
